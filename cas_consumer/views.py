@@ -14,14 +14,13 @@ cas_redirect_on_logout = settings.CAS_REDIRECT_ON_LOGOUT
 
 
 def login(request):
-    """ Fairly standard login view.
-
-        1. Checks request.GET for a service ticket.
-        2. If there is NOT a ticket, redirects to the CAS provider's login page.
-        3. Otherwise, attempt to authenticate with the backend using the ticket.
-        4. If the backend is able to validate the ticket, then the user is logged in and redirected to *CAS_NEXT_DEFAULT*.
-        5. Otherwise, the process fails and displays an error message.
-
+    """
+    Fairly standard login view.
+    1. Checks request.GET for a service ticket.
+    2. If there is NOT a ticket, redirects to the CAS provider's login page.
+    3. Otherwise, attempt to authenticate with the backend using the ticket.
+    4. If the backend is able to validate the ticket, then the user is logged in and redirected to *CAS_NEXT_DEFAULT*.
+    5. Otherwise, the process fails and displays an error message.
     """
     ticket = request.GET.get(settings.CAS_TICKET_LABEL, None)
     next_ = request.GET.get('next_page', cas_next_default)
@@ -44,8 +43,9 @@ def login(request):
 
 
 def logout(request, next_page=cas_redirect_on_logout):
-    """ Logs the current user out. If *CAS_COMPLETELY_LOGOUT* is true, redirect to the provider's logout page,
-        which will redirect to ``next_page``.
+    """
+    Logs the current user out. If *CAS_COMPLETELY_LOGOUT* is true, redirect to the provider's logout page,
+    which will redirect to ``next_page``.
     """
     auth_logout(request)
     if settings.CAS_COMPLETELY_LOGOUT:
