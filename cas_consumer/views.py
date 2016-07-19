@@ -31,6 +31,7 @@ def login(request):
         raw_params = ['%s=%s' % (key, value) for key, value in params.items()]
         url += '&'.join(raw_params)
         return HttpResponseRedirect(url)
+
     user = authenticate(service=service, ticket=ticket)
     if user is not None:
         auth_login(request, user)
